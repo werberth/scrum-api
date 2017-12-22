@@ -6,6 +6,20 @@ from .models import Sprint, Task
 User = get_user_model()
 
 
+class UserSerializer(serializers.ModelSerializer):
+    full_name = serializers.CharField(
+        source='get_full_name',
+        read_only=True
+    )
+
+    class Meta:
+        model = User
+        fields = (
+            'id', User.USERNAME_FIELD,
+            'full_name', 'is_active'
+        )
+
+
 class SprintSerializer(serializers.ModelSerializer):
 
     class Meta:
