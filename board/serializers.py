@@ -12,13 +12,24 @@ class UserSerializer(serializers.ModelSerializer):
         source='get_full_name',
         read_only=True
     )
+    links = serializers.SerializerMethodField()
 
     class Meta:
         model = User
         fields = (
             'id', User.USERNAME_FIELD,
-            'full_name', 'is_active'
+            'full_name', 'links', 'is_active'
         )
+
+    def get_links(self, obj):
+        request = self.context['request']
+        username = obj.get_username()
+        return {
+            'self': reverse(
+                'user-detail',
+                kwargs={User.USERNAME_FIELD: username}, request=request
+            )
+        }
 
 
 class SprintSerializer(serializers.ModelSerializer):
