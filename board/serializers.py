@@ -89,7 +89,7 @@ class TaskSerializer(serializers.ModelSerializer):
         if obj.assigned:
             links['assigned'] = reverse(
                 'user-detail',
-                kwargs={User.USERNAME_FIELD: object.assigned},
+                kwargs={User.USERNAME_FIELD: obj.assigned},
                 request=request
             )
         return links
