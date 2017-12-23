@@ -48,6 +48,8 @@ class TaskViewSet(DefaultsMixin, viewsets.ModelViewSet):
 
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
+    search_fields = ('name', 'description',)
+    ordering_fields = ('name', 'order', 'started', 'due', 'completed',)
 
 
 class UserViewSet(
