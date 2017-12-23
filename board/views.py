@@ -39,7 +39,7 @@ class TaskViewSet(DefaultsMixin, viewsets.ModelViewSet):
     """API endpoint for listing and creating tasks."""
 
     queryset = Task.objects.all()
-    serializers_class = TaskSerializer
+    serializer_class = TaskSerializer
 
 
 class UserViewSet(
