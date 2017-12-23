@@ -30,7 +30,8 @@ class SprintSerializer(serializers.ModelSerializer):
 class TaskSerializer(serializers.ModelSerializer):
     status_display = serializers.SerializerMethodField('get_status_display')
     assigned = serializers.SlugRelatedField(
-        slug_field=User.USERNAME_FIELD, required=False
+        slug_field=User.USERNAME_FIELD, required=False,
+        queryset=User.objects.all()
     )
 
     class Meta:
