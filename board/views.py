@@ -62,3 +62,4 @@ class UserViewSet(
     lookup_field_kwarg = User.USERNAME_FIELD
     queryset = User.objects.order_by(User.USERNAME_FIELD)
     serializer_class = UserSerializer
+    search_fields = (User.USERNAME_FIELD,)
