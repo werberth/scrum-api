@@ -9,6 +9,7 @@ from rest_framework import (
 
 from .models import Sprint, Task
 from .serializers import SprintSerializer, TaskSerializer, UserSerializer
+from .forms import TaskFilter
 
 User = get_user_model()
 
@@ -48,6 +49,7 @@ class TaskViewSet(DefaultsMixin, viewsets.ModelViewSet):
 
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
+    filter_class = TaskFilter
     search_fields = ('name', 'description',)
     ordering_fields = ('name', 'order', 'started', 'due', 'completed',)
 
