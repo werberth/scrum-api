@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 import django_filters
 
-from .models import Task
+from .models import Task, Sprint
 
 User = get_user_model()
 
@@ -13,6 +13,15 @@ class NullFilter(django_filters.BooleanFilter):
         if value is not None:
             return qs.filter(**{'{}__isnull'.format(self.name): value})
         return qs
+
+
+class SprintFilter(django_filters.FilterSet):
+    end_min = django_filters.DateFilter(name='end', lookup_type='gte')
+    end_max = django_filters.DateFilter(name='end', lookup_type='lte')
+
+    class Meta:
+        model = Sprint
+        fields = ('end_min', 'end_max',)
 
 
 class TaskFilter(django_filters.FilterSet):
