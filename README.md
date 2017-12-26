@@ -1,10 +1,10 @@
 # Scrum Board API
 
-Scrum Board API project exemple from the book [Lightweight Django by Julia Elman and Mark Lavin (O’Reilly). Copyright 2014.](http://www.amazon.com/Lightweight-Django-Julia-Elman/dp/149194594X/)
+Project example from the book [Lightweight Django by Julia Elman and Mark Lavin (O’Reilly). Copyright 2014.](http://www.amazon.com/Lightweight-Django-Julia-Elman/dp/149194594X/)
 
 ## Terms and Conditions
 
-Please assume the terms and conditions transfer from the examples from the book at [github.com/lightweightdjango](https://github.com/lightweightdjango/examples).
+Please assume the terms and conditions transfer from the examples from the book at [@lightweightdjango](https://github.com/lightweightdjango/examples).
 
 ## Installation
 
@@ -16,7 +16,7 @@ source .env/bin/activate
 pip install -r requirements.txt
 ```
 
- - Rename the exemple.env file to .env and set the ```DEBUB``` variable to ```True```.
+ - Rename the example.env file to .env and set the ```DEBUB``` variable to ```True```.
  - If you want to use PostgreSQL, replace the username for the database username, the password for the user's password, and database_name for the database name. Example:
 
  	```DATABASE_URL='postgres://username:password@localhost/database_name'```
