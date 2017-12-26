@@ -114,3 +114,37 @@ class TaskSerializer(serializers.ModelSerializer):
                 request=request
             )
         return links
+
+    def validate(self, data):
+        sprint = data['sprint']
+        status = int(data['status'])
+        started = data['started']
+        completed = data['completed']
+        if not sprint and status != Task.STATUS_TODO:
+            msg = _('Backlog tasks must have "Not Started" status.')
+            raise serializers.ValidationError(msg)
+        if started and status == Task.STATUS_TODO:
+            msg = _('Started date cannot be set for not started tasks.')
+            raise serializers.ValidationError(msg)
+        if completed and status != Task.STATUS_DONE:
+            msg = _('Completed date cannot be set for uncompleted tasks.')
+            raise serializers.ValidationError(msg)
+        return data
+
+
+    def validate_sprint(self, value):
+        sprint = value
+        if self.instance and self.instance.pk:
+            if sprint != self.instance.sprint:
+                if self.instance.status == Task.STATUS_DONE:
+                    msg = _('Cannot change the sprint of a completed task.')
+                    raise serializers.ValidationError(msg)
+                if sprint and sprint.end < date.today():
+                    msg = _('Cannot assign tasks to past sprints.')
+                    raise serializers.ValidationError(msg)
+        else:
+            if sprint and sprint.end < date.today():
+                msg = _('Cannot add tasks to past sprints.')
+                raise serializers.ValidationError(msg)
+        return value
+
